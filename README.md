@@ -1,0 +1,2 @@
+# aurea_nsop
+nsop
