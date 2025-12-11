@@ -1,5 +1,5 @@
 git branch
 git remote -v
 git status
-git ls-remote https://github.com/webdev-blip/camo_new.git
+git ls-remote https://github.com/webdev-blip/aurea_nsop.git
 
