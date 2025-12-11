@@ -1,0 +1,53 @@
+/* Main Layout */
+.form-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Two columns, 2nd is slightly wider */
+  gap: 20px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Reusable Section Box */
+.form-section {
+  border: 1px solid #004a99; /* Blue border like the image */
+  border-radius: 4px;
+}
+
+.section-title {
+  background-color: #e6f0fa; /* Light blue header */
+  border-bottom: 1px solid #004a99;
+  padding: 6px 10px;
+  font-size: 14px;
+  margin: 0;
+  color: #004a99;
+}
+
+.section-content {
+  padding: 15px;
+  display: grid;
+  gap: 12px;
+  /* You can use grid here too for field layout */
+}
+
+/* Basic Field Styling */
+.form-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-field label {
+  width: 120px; /* Aligns fields */
+  font-size: 13px;
+  text-align: right;
+}
+.form-field input,
+.form-field select {
+  flex-grow: 1;
+  padding: 4px;
+}
+
+/* ...etc... */
