@@ -32,13 +32,23 @@ exports.createModel = async (req, res) => {
 // Get all aircrafts
 exports.getAllmodels = async (req, res) => {
   try {
-    const models = await AircraftModel.findAll(); // ✅ Use a different variable name
-    res.json(models);
+
+    // Fetch all aircraft models INCLUDING manufacturer
+    const aircraftmodelList = await AircraftModel.findAll({
+      include: [{ model: ManufacturerModel }]
+    });
+
+    res.json({
+      models: aircraftmodelList
+    });
+
   } catch (err) {
-    console.error("Error fetching aircraft models:", err);
+    console.error("Error fetching data:", err);
     res.status(500).json({ error: err.message });
   }
 };
+
+
 
 // Get single aircraft
 exports.getmodelById = async (req, res) => {
@@ -68,9 +78,9 @@ exports.updateModel = async (req, res) => {
 // Delete aircraft
 exports.deleteModel = async (req, res) => {
   try {
-    const AircraftModel  = await AircraftModel .findByPk(req.params.id);
-    if (!AircraftModel ) return res.status(404).json({ message: 'Aircraft not found' });
-    await AircraftModel .destroy();
+    const aircraftModel  = await AircraftModel.findByPk(req.params.id);
+    if (!aircraftModel) return res.status(404).json({ message: 'Aircraft not found' });
+    await aircraftModel.destroy();
     res.json({ message: 'Aircraft deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });

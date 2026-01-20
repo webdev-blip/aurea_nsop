@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class AircraftModel extends Model {
     static associate(models) {
       // 🛠 Define associations if needed later
-      // AircraftModel.hasMany(models.Aircraft, { foreignKey: 'model_id' });
+      AircraftModel.hasMany(models.ManufacturerModel, { foreignKey: 'model_id' });
     }
   }
 
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
 
       // ⚙️ Assembly Type
       assembly: {
-        type: DataTypes.ENUM('Airframe', 'Engine', 'Propeller', 'Rotor', 'Other'),
+        type: DataTypes.ENUM('Airframe', 'Engine', 'Landing Gear'),
         allowNull: false,
         defaultValue: 'Airframe',
       },

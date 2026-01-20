@@ -67,8 +67,8 @@ exports.updateModel = async (req, res) => {
 exports.deleteModel = async (req, res) => {
   try {
     const manufacturers  = await ManufacturerModel.findByPk(req.params.id);
-    if (!manufacturers ) return res.status(404).json({ message: 'Manufacturer not found' });
-    await manufacturers .destroy();
+    if (!manufacturers) return res.status(404).json({ message: 'Manufacturer not found' });
+    await manufacturers.destroy();
     res.json({ message: 'Manufacturer deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });

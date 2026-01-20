@@ -55,9 +55,9 @@ exports.updateModel = async (req, res) => {
 // Delete aircraft
 exports.deleteModel = async (req, res) => {
   try {
-    const primarymodel  = await primarymodel.findByPk(req.params.id);
-    if (!primarymodel ) return res.status(404).json({ message: 'Primary model not found' });
-    await primarymodel .destroy();
+    const primarymodels  = await Primarymodel.findByPk(req.params.id);
+    if (!primarymodels) return res.status(404).json({ message: 'Primary model not found' });
+    await primarymodels.destroy();
     res.json({ message: 'Primary model deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -20,7 +20,7 @@ function ManufacturerForm(props) {
         setError("Failed to fetch models from server.");
       }
     };
-    getAllManufacturersList();
+    getAllManufacturersList(); 
   }, []);
 
   const handleChange = (e) => {
@@ -59,10 +59,19 @@ function ManufacturerForm(props) {
     }
   };
 
-  const handleDelete = (index) => {
-    const updatedList = ManufacturersList.filter((_, i) => i !== index);
-    setManufacturersList(updatedList);
-  };
+
+const handleDelete = async (id) => {
+  if (!window.confirm("Are you sure you want to delete this item?")) return;
+  try {
+    await axios.delete(`http://localhost:5000/api/manufacturers/${id}`);
+    // Optimistic update: remove immediately for better UX
+    setManufacturersList(prevList => prevList.filter(item => item.id !== id));
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete item");
+    // Optional: refetch data or revert optimistic update on error
+  }
+};
 
   return (
     <div className="container-fluid py-4">
@@ -182,7 +191,7 @@ function ManufacturerForm(props) {
                     <td className="pe-4 text-end">
                       <button
                         className="btn btn-outline-danger btn-sm"
-                        onClick={() => handleDelete(index)}
+                        onClick={() => handleDelete(item.id)}
                       >
                         <i className="bi bi-trash me-1"></i>
                         Delete

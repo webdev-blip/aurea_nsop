@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function PrimaryModelForm() {
+function PrimaryModelForm({onUpdatepmodel}) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [primarymodelList, setPrimarymodelList] = useState([]);
@@ -43,6 +43,7 @@ function PrimaryModelForm() {
       setPrimarymodelList([...primarymodelList, newModel]);
       setFormData({ name: "" });
       alert("Primary model added successfully!");
+         onUpdatepmodel(response.data);
     } catch (error) {
       console.error("Error adding primary model:", error);
       setError(error.response?.data?.message || "Failed to add Primary Model. Please try again.");
@@ -51,10 +52,19 @@ function PrimaryModelForm() {
     }
   };
 
-  const handleDelete = (index) => {
-    const updatedList = primarymodelList.filter((_, i) => i !== index);
-    setPrimarymodelList(updatedList);
-  };
+
+const handleDelete = async (id) => {
+  if (!window.confirm("Are you sure you want to delete this item?")) return;
+  try {
+    await axios.delete(`http://localhost:5000/api/primarymodel/${id}`);
+    // Optimistic update: remove immediately for better UX
+    setPrimarymodelList(prevList => prevList.filter(item => item.id !== id));
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete item");
+    // Optional: refetch data or revert optimistic update on error
+  }
+};
 
   return (
     <div className="container-fluid py-4">
@@ -171,7 +181,7 @@ function PrimaryModelForm() {
                     <td className="pe-4 text-end">
                       <button
                         className="btn btn-outline-danger btn-sm"
-                        onClick={() => handleDelete(index)}
+                        onClick={() => handleDelete(item.id)}
                       >
                         <i className="bi bi-trash me-1"></i>
                         Delete

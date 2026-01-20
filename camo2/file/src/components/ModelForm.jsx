@@ -28,7 +28,7 @@ function ModelForm(props) {
       <div className="modal-dialog modal-dialog-scrollable modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Add New Model</h5>
+            <h5 className="modal-title">Add New Manufacturer </h5>
             <button
               type="button"
               className="btn-close"
@@ -51,7 +51,7 @@ function ModelForm(props) {
     </div>
   );
 
-  const AddManuPmodelModal = () => (
+  const AddManuPmodelModal = ({onUpdatepmodel}) => (
     <div
       className={`modal fade ${showModal2 ? 'show d-block' : ''}`}
       style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
@@ -68,7 +68,7 @@ function ModelForm(props) {
           </div>
 
           <div className="modal-body">
-          <PrimaryModelForm   />
+          <PrimaryModelForm  onUpdatepmodel = {onUpdatepmodel} />
           </div>
 
           <div className="modal-footer">
@@ -87,7 +87,7 @@ function ModelForm(props) {
   const [formData, setFormData] = useState({
     manufacturer_id: "",
     model_name: "",
-    assembly: "Airframe",
+    assembly: "",
     primary_model_id: "",
   });
 
@@ -102,6 +102,7 @@ function ModelForm(props) {
     const getAllModels = async () => {
       try {
         const res = await axios.get("http://localhost:5000/api/aircraftmodels");
+        console.log(res.data)
         setModelList(res.data); // ✅ directly set list
       } catch (err) {
         console.error("❌ Error fetching models:", err);
@@ -166,6 +167,8 @@ const handleSubmit = async (e) => {
   }
 
   try {
+
+    console.log("f",formData)
     // Send formData correctly
     const res = await axios.post(
       "http://localhost:5000/api/aircraftmodels",
@@ -196,17 +199,29 @@ const handleSubmit = async (e) => {
     setmanuListList(prev => [...prev, newmanufec]);
   };
 
+  const onUpdatepmodel = (newpmodel) => {
+    setprimarymodelList(prev => [...prev, newpmodel]);
+  }
 
   // ✅ Delete handler
-  const handleDelete = (index) => {
-    const updatedList = modelList.filter((_, i) => i !== index);
-    setModelList(updatedList);
-  };
+
+const handleDelete = async (id) => {
+  if (!window.confirm("Are you sure you want to delete this item?")) return;
+  try {
+    await axios.delete(`http://localhost:5000/api/aircraftmodels/${id}`);
+    // Optimistic update: remove immediately for better UX
+    setModelList(prevList => prevList.filter(item => item.id !== id));
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete item");
+    // Optional: refetch data or revert optimistic update on error
+  }
+};
 
   return (
     <div className="container-fluid py-4">
       {/* Header */}
-      <AddManuPmodelModal />
+      <AddManuPmodelModal  onUpdatepmodel = {onUpdatepmodel}/>
       <AddManufacturerModal  handleUpdatemanu={handleUpdatemanu}/>
 
       <div className="row mb-4">
@@ -410,7 +425,7 @@ const handleSubmit = async (e) => {
                     <td className="pe-4 text-end">
                       <button
                         className="btn btn-outline-danger btn-sm"
-                        onClick={() => handleDelete(index)}
+                        onClick={() => handleDelete(item.id)}
                       >
                         <i className="bi bi-trash me-1"></i> Delete
                       </button>

@@ -3,3 +3,6 @@ git remote -v
 git status
 git ls-remote https://github.com/webdev-blip/aurea_nsop.git
 
+.env
+node_modules/
+package-lock.json

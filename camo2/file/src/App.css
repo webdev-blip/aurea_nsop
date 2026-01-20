@@ -17,6 +17,11 @@
   border-radius: 4px;
 }
 
+/* select.form-select.form-select-lg.border-0.bg-light {
+    height: auto;
+    padding: 10px 6px;
+} */
+
 .section-title {
   background-color: #e6f0fa; /* Light blue header */
   border-bottom: 1px solid #004a99;
