@@ -101,6 +101,12 @@ import './App.css';
 
 import Manufecturer from "./pages/Manufecturer";
 import AircraftModel from "./components/AircraftModel";
+import City from "./pages/CityPage";
+import Place from "./pages/PlacePage";
+import Vendor from "./pages/VendorPage";
+import VendorFormPage  from "./pages/VendorFormPage";
+import AtaPage from "./pages/AtaPage";
+// import VendorCity  from "./components/VendorCity";
 function App() {
   return (
     <BrowserRouter>
@@ -110,6 +116,15 @@ function App() {
          <Route exact path='/aircraft' element={<Aircraft />} />
         <Route exact path='/model' element={<AircraftModel />} />
         <Route exact path='/manufecturer' element={<Manufecturer />} />
+        <Route exact path='/city' element={<City />} />
+        <Route exact path="/place" element={<Place />} />
+        <Route exact path="/vendor" element={<Vendor />} />
+        {/* <Route exact path="/vendor-city" element={<VendorCity />} /> */}
+        <Route exact path="/vendor" element={<VendorFormPage  />} />
+        <Route exact path="/vendor/new" element={<VendorFormPage  />} />
+        <Route exact path="/vendor/edit/:id" element={<VendorFormPage  />} />
+
+        <Route exact path="/ata" element={<AtaPage />} /> 
         {/* <Route exact path='/index-2' element={<HomePageTwo />} /> */}
         <Route exact path='/index-3' element={<HomePageThree />} />
         <Route exact path='/index-4' element={<HomePageFour />} />

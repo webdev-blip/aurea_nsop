@@ -183,6 +183,51 @@ const MasterLayout = ({ children }) => {
                     Manufecturer
                   </NavLink>
                 </li>
+                  <li>
+                  <NavLink
+                    to='/city'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />{" "}
+                    City
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    to='/place'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />{" "}
+                    Place
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/vendor'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />{" "}
+                    Vendor
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to='/ata'
+                    className={(navData) =>
+                      navData.isActive ? "active-page" : ""
+                    }
+                  >
+                    <i className='ri-circle-fill circle-icon text-warning-main w-auto' />{" "}
+                    ATA
+                  </NavLink>
+                </li>
+              
                 {/* 
                   <li>
                   <NavLink
