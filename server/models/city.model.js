@@ -1,10 +1,10 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class Periods extends Model {}
+  class City extends Model {}
 
-  Periods.init(
+  City.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -14,19 +14,20 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(150),
         allowNull: false,
-        
+      },
+      gmt: {
+        type: DataTypes.STRING(150),
+        allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: 'Periods',
-      tableName: 'periods',
+      modelName: "City",
+      tableName: "city",
       timestamps: true,
       underscored: true,
     }
   );
 
-  return Periods;
+  return City;
 };
-
-

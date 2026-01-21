@@ -60,7 +60,6 @@ const handleSubmit = async (e) => {
       value: item.value ?? "",
     });
 
-    
     const items = res.data.data.map(normalize);
     alert("Periods submitted successfully!");
     setSelected([]);

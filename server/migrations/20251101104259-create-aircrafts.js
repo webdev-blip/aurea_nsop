@@ -95,7 +95,7 @@ module.exports = {
 
       // 🕓 TSN (Times Since New)
       tsn_data: {
-      type: DataTypes.JSON,
+      type: Sequelize.JSON,
         allowNull: true, // optional
         defaultValue: [], // optional, if you want an empty array by default
       },
